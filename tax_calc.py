@@ -122,6 +122,12 @@ def calculateFederalTaxOwed(taxable_income, tax_brackets, tax_credits):
             amount_paid_at_this_bracket = (max_band_value - previous_bracket_upper_value) * rate
             fed_tax_owed += amount_paid_at_this_bracket
             previous_bracket_upper_value = max_band_value
+
+            # Check for edge case where entered value is greater than $1M, which is notation for
+            # highest bracket's upper limit (but there is no bracket on upper limit)
+            if previous_bracket_upper_value == 1000000:
+                fed_tax_owed += (taxable_income - previous_bracket_upper_value)*rate
+                break
         
         # If the taxable income is not greater than the upper limit of the bracket
         # Then only the fraction of the bracket earned is paid
@@ -130,6 +136,7 @@ def calculateFederalTaxOwed(taxable_income, tax_brackets, tax_credits):
             fed_tax_owed += amount_paid_at_this_bracket
             break
     
+
     # Sum up tax credits
     sum_tax_credits = 0.00
     for k in tax_credits:
