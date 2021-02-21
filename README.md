@@ -45,7 +45,7 @@ The CSV files folder contains the following list of `.csv` files, which are read
     - Structure the file similarly to how `itemized_deductions.csv` is structured with each line of the file containing one tax credit name and value (e.g. `tax credit name, tax credit value in dollars`)
 
 
-### Debugging
+## Debugging
 
 The following are some "gatcha's" that could cause issues:
 - All numbers in the CSV should be entered without dollar signs or commas
